@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kaveri Dubey - Personal Portfolio</title>
+  <title>Kaveri Dubey — Personal Portfolio</title>
   <style>
     :root{
       --bg:#0f1724;--card:#101a2f;--accent:#7ee7d9;--accent-2:#6bd3ff;--muted:#9aa4b2;
@@ -92,7 +92,6 @@
 
         <div style="margin-top:20px;">
           <div class="section-title">Resume</div>
-          <!-- Updated: use a JS handler that attempts to download the PDF; if not found, fallback to providing the resume via text download or mailto -->
           <button class="btn" id="downloadResumeBtn">Download Resume (PDF)</button>
           <div id="resumeNote" class="small" style="margin-top:8px;color:var(--muted)"></div>
         </div>
@@ -112,12 +111,24 @@
             <p class="small">Implemented a simple machine learning classifier using Python libraries (NumPy, Pandas, Scikit-learn).</p>
             <div class="badges"><span class="badge">Python</span><span class="badge">Pandas</span><span class="badge">Scikit-learn</span></div>
           </div>
-        </div>
 
-        <div class="card">
-          <h2>Declaration</h2>
-          <p class="small">I hereby declare that the information provided above is true to the best of my knowledge and belief.</p>
-          
+          <div class="project">
+            <h3>Weather App</h3>
+            <p class="small">Created a responsive weather forecast web app using OpenWeatherMap API. It displays live temperature, humidity, and forecast for user-input cities.</p>
+            <div class="badges"><span class="badge">JavaScript</span><span class="badge">API</span><span class="badge">Bootstrap</span></div>
+          </div>
+
+          <div class="project">
+            <h3>Student Result Management System</h3>
+            <p class="small">Developed a basic system to manage student records, calculate grades, and visualize class performance using Python and file handling.</p>
+            <div class="badges"><span class="badge">Python</span><span class="badge">File Handling</span><span class="badge">Data Visualization</span></div>
+          </div>
+
+          <div class="project">
+            <h3>Responsive Landing Page</h3>
+            <p class="small">Designed a clean, mobile-friendly landing page for a fictional tech company using HTML5, CSS3, and responsive grid layout.</p>
+            <div class="badges"><span class="badge">HTML5</span><span class="badge">CSS3</span><span class="badge">Responsive Design</span></div>
+          </div>
         </div>
       </section>
     </main>
@@ -128,7 +139,6 @@
   </div>
 
   <script>
-    // Try to download resume.pdf; if not available, fallback to a plain-text resume download or mailto
     document.getElementById('downloadResumeBtn').addEventListener('click', async function(){
       const url = 'Kaveri_Dubey_Resume.pdf';
       const noteEl = document.getElementById('resumeNote');
@@ -136,7 +146,6 @@
       try{
         const res = await fetch(url, {method:'HEAD'});
         if (res.ok){
-          // file exists on server — trigger normal download
           const a = document.createElement('a');
           a.href = url;
           a.download = 'Kaveri_Dubey_Resume.pdf';
@@ -146,33 +155,9 @@
           noteEl.textContent = 'If the download did not start, please right-click the link and choose "Save link as..." or email to request a copy.';
           return;
         }
-      }catch(err){
-        // fall through to fallback
-      }
+      }catch(err){}
 
-      // Fallback: generate a simple text resume and offer it as .txt download, and show mailto option
-      const txt = `Kaveri Dubey
-Muzaffarnagar, India
-Email: kaveridubey30@gmail.com
-Phone: +91 8958566087
-
-Career Objective:
-Motivated and detail-oriented B.Tech Computer Science (AI) student, graduating in 2027...
-
-Education:
-B.Tech - Computer Science (AI), SD Engineering & Technology, Expected 2027
-
-Skills:
-- Python
-- HTML & CSS
-- JavaScript
-- ML Basics
-
-Projects:
-- Portfolio Website
-- Data Classification Model
-
-(Full PDF not found on server. Please email kaveridubey30@gmail.com to request the official PDF resume.)`;
+      const txt = `Kaveri Dubey\nMuzaffarnagar, India\nEmail: kaveridubey30@gmail.com\nPhone: +91 8958566087\n\nCareer Objective:\nMotivated and detail-oriented B.Tech Computer Science (AI) student, graduating in 2027...\n\nEducation:\nB.Tech - Computer Science (AI), SD Engineering & Technology, Expected 2027\n\nSkills:\n- Python\n- HTML & CSS\n- JavaScript\n- ML Basics\n\nProjects:\n- Portfolio Website\n- Data Classification Model\n\n(Full PDF not found on server. Please email kaveridubey30@gmail.com to request the official PDF resume.)`;
 
       const blob = new Blob([txt], {type: 'text/plain'});
       const link = document.createElement('a');
@@ -185,7 +170,6 @@ Projects:
       noteEl.innerHTML = 'PDF resume not found on the server. A plain-text version was downloaded instead. <br>Or <a href="mailto:kaveridubey30@gmail.com">email to request the PDF</a>.';
     });
 
-    // animate skill bars on load
     window.addEventListener('load', ()=>{
       document.querySelectorAll('.bar-fill').forEach(b=>{ b.style.width = b.style.width || '0%'; });
       setTimeout(()=>{ document.querySelectorAll('.bar-fill').forEach(b=>{ if(!b.style.width || b.style.width==='0%') b.style.width = '60%'; }); }, 200);
